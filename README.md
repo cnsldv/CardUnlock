@@ -16,7 +16,7 @@ make
 
 ## How to install
 
-You need a Vita running HENkaku to be able to use CardUnlock, since you need to be able to run HENkaku without a card it needs to be a slim/TV. Install the vpk in the usual way (MolecularShell or VitaShell). Due to what it does CardUnlock is unsafe homebrew. I recommend building it from source, you should always do this where you can.
+You need a Vita running HENkaku to be able to use CardUnlock. Install the vpk in the usual way (MolecularShell or VitaShell). If you are using a model 1K Vita you should use Application Storage Manager to copy CardUnlock to ur0: since you can't have a card in ux0: when you run it. Due to what it does CardUnlock is unsafe homebrew. I recommend building it from source, you should always do this where you can.
 
 ## How to use it
 
