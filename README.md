@@ -20,7 +20,13 @@ You need a Vita running HENkaku to be able to use CardUnlock, since you need to 
 
 ## How to use it
 
-Start your Vita/TV without the card in, fire up HENkaku and start CardUnlock. Insert your card now and answer No to the system message asking you to restart. Press the X button and wait for it to do it's stuff. Press X again to reboot the Vita and gain access to the card or O to exit so you can remove the card to use elsewhere. Since the Vita thinks the card is new you will get questions about copying data from internal, say No to these.
+* start Vita without the card inserted
+* run HENkaku and  start CardUnlock
+* insert card, answer "no" to "do you want to reboot now" message
+* press X to remove id.dat
+* press X to reboot or O to exit (after pressing O you can remove the card to insert in another device)
+* answer "no" to questions about copying content to the card
+* you now have access to the card
 
 ## How does it work?
 
