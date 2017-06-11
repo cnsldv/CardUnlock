@@ -21,16 +21,16 @@ You need a Vita running HENkaku to be able to use CardUnlock. Install the vpk in
 ## How to use it
 
 * start Vita without the card inserted
-* run HENkaku and  start CardUnlock
-* insert card, answer "no" to "do you want to reboot now" message
-* press X to remove id.dat
+* run HENkaku and start CardUnlock
+* insert the memory card, answer "no" to the "do you want to reboot now" message from the system
+* press X to rename id.dat
 * press X to reboot or O to exit (after pressing O you can remove the card to insert in another device)
-* answer "no" to questions about copying content to the card
+* answer "no" to questions about copying content to the card from the system
 * you now have access to the card
 
 ## How does it work?
 
-The Vita looks at the file id.dat in the root of the card to see if it's attached to another user/version when mounting the card. Removing this file makes the Vita think this is a new card allowing you to mount it. The problem is that you need to mount the card to remove the file and mounting ux0: causes the Vita to check the file before you can delete it. CardUnlock gets around this by mounting the card as xmc0: which is the actual mount point for external cards. The Vita doesn't check for id.dat when you mount xmc0: so we can mount the device and delete id.dat.
+The Vita looks at the file id.dat in the root of the card to see if it's attached to another user/version when mounting the card. Removing/renaming this file makes the Vita think this is a new card allowing you to mount it. The problem is that you need to mount the card to access the file and mounting ux0: causes the Vita to check the file before you can delete it. CardUnlock gets around this by mounting the card as xmc0: which is the actual mount point for external cards. The Vita doesn't check for id.dat when you mount xmc0: so we can mount the device and rename id.dat.
 
 ## Credits
 

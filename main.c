@@ -34,14 +34,22 @@ int main(int argc, char *argv[])
 	psvDebugScreenInit();
 
 	psvDebugScreenSetFgColor(COLOR_WHITE);
-	printf("CardUnlock by cnsldv\n");
-	printf("====================\n");
+	printf("CardUnlock v1.1 by cnsldv (Contributions By Hexxellor)\n");
+	printf("======================================================\n");
+	printf("NOTE: This application will attempt to rename the\n");
+	printf("id.dat file on your memory card to id.bak. This will\n");
+	printf("allow you to preserve the original in case you want to\n");
+	printf("retrieve any information from it.\n");
+	printf("======================================================\n");
 	printf("\n");
 	psvDebugScreenSetFgColor(COLOR_RED);
-	printf("WARNING: use of this program is at your own risk!\n");
+	printf("WARNING: Use of this program is at your own risk!\n");
+	printf("         If a backup file (id.bak) exists already\n");
+	printf("         it will be removed so backup the file\n");
+	printf("         if you need to keep it!\n");
 	psvDebugScreenSetFgColor(COLOR_WHITE);
 	printf("\n");
-	
+
 	printf("Insert card now, select \"No\" when asked to reboot\n");
 
 	printf("Once card is inserted press X to continue\n");
@@ -58,15 +66,32 @@ int main(int argc, char *argv[])
 		return 0;
 	}
 
-	printf("Removing id.dat\n");
+	// Remove the old id.bak file if it exists
+	printf("Checking for existing id.bak file...\n");
+	fd = sceIoOpen("xmc0:id.bak", SCE_O_RDONLY, 0);
+	if (fd >= 0) {
+		sceIoClose(fd);
+		printf("Removing old id.bak file\n");
+		ret = sceIoRemove("xmc0:id.bak");
+		if (ret != 0) {
+			psvDebugScreenSetFgColor(COLOR_RED);
+			psvDebugScreenPrintf("Unable to remove id.bak err=0x%08X\n", ret);
+			psvDebugScreenSetFgColor(COLOR_WHITE);
+		}
+	}
+
+	// Rename the id.dat file to id.bak so we can retain the information in it.
+	// NOTE: Technically if the previous attempt to remove an existing id.bak fails
+	//       proceeding with this is sort of stupid. *shrug* Lots of checking could be
+	//       added. Don't care. :)
+	printf("Renaming current id.dat to id.bak\n");
 	fd = sceIoOpen("xmc0:id.dat", SCE_O_RDONLY, 0);
 	if (fd >= 0) {
 		sceIoClose(fd);
-	
-		ret = sceIoRemove("xmc0:id.dat");
+		ret = sceIoRename("xmc0:id.dat", "xmc0:id.bak");
 		if (ret != 0) {
 			psvDebugScreenSetFgColor(COLOR_RED);
-			psvDebugScreenPrintf("Unable to remove id.dat err=0x%08X\n", ret);
+			psvDebugScreenPrintf("Unable to rename id.dat err=0x%08X\n", ret);
 			psvDebugScreenSetFgColor(COLOR_WHITE);
 		}
 	}
@@ -113,4 +138,3 @@ unsigned int wait_keys(unsigned int key_mask)
 		sceKernelDelayThreadCB(200 * 1000);
 	}
 }
-
